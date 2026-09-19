@@ -1,0 +1,279 @@
+/* ==========================================================================
+   Custom CSS for Personal Portfolio & Performance System
+   Name: มณีกรานต์ บุญจง (Maneekran Boonjong)
+   Theme Palette: #3BB489, #76C58C, #26A69A, #AED581, #FFCA28, #FF8A65, #EF5350, #4A2C6D, #D32F2F, #F57C00, #FBC02D, #0288D1
+   Font: Sarabun (Google Font)
+   ========================================================================== */
+
+:root {
+  --primary: #3BB489;
+  --primary-light: #76C58C;
+  --primary-dark: #26A69A;
+  --accent-lime: #AED581;
+  --accent-yellow: #FFCA28;
+  --accent-orange: #FF8A65;
+  --accent-red: #EF5350;
+  --accent-purple: #4A2C6D;
+  --accent-crimson: #D32F2F;
+  --accent-deep-orange: #F57C00;
+  --accent-gold: #FBC02D;
+  --accent-blue: #0288D1;
+  --bg-slate: #F8FAFC;
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+}
+
+body {
+  font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text-main);
+  background-color: #F8FAFC;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* --------------------------------------------------------------------------
+   Splash Screen with Background Decoration
+   -------------------------------------------------------------------------- */
+#splash-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 50%, #F0F9FF 100%);
+  overflow: hidden;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s ease;
+}
+
+#splash-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Abstract Background Decorations for Splash Screen */
+.splash-bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  animation: floatOrb 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.shape-1 {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(59, 180, 137, 0.45) 0%, rgba(118, 197, 140, 0.2) 70%, transparent 100%);
+  top: -120px;
+  left: -120px;
+  animation-duration: 14s;
+}
+
+.shape-2 {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(2, 136, 209, 0.3) 0%, rgba(74, 44, 109, 0.2) 70%, transparent 100%);
+  bottom: -150px;
+  right: -150px;
+  animation-duration: 16s;
+  animation-delay: -3s;
+}
+
+.shape-3 {
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(255, 202, 40, 0.35) 0%, rgba(255, 138, 101, 0.25) 70%, transparent 100%);
+  top: 40%;
+  left: 60%;
+  animation-duration: 10s;
+  animation-delay: -5s;
+}
+
+.shape-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#CBD5E1 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0px, 0px) scale(1); }
+  50% { transform: translate(35px, -25px) scale(1.08); }
+  100% { transform: translate(-25px, 30px) scale(0.95); }
+}
+
+/* Splash Progress Bar */
+.splash-progress-bar {
+  width: 100%;
+  height: 5px;
+  background-color: #E2E8F0;
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.splash-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3BB489 0%, #76C58C 50%, #26A69A 100%);
+  border-radius: 9999px;
+  width: 0%;
+  transition: width 0.15s ease-out;
+}
+
+/* --------------------------------------------------------------------------
+   Global Loading Spinner Overlay (Every Action & Process)
+   -------------------------------------------------------------------------- */
+#global-spinner {
+  position: fixed;
+  inset: 0;
+  z-index: 99990;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  pointer-events: none;
+}
+
+#global-spinner.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.spinner-ring {
+  width: 54px;
+  height: 54px;
+  border: 4px solid rgba(59, 180, 137, 0.18);
+  border-top-color: #3BB489;
+  border-right-color: #76C58C;
+  border-radius: 50%;
+  animation: spinRing 0.75s linear infinite;
+}
+
+@keyframes spinRing {
+  to { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   Navigation & Tab Animation
+   -------------------------------------------------------------------------- */
+.nav-item {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-item.active {
+  background: linear-gradient(135deg, rgba(59, 180, 137, 0.12) 0%, rgba(118, 197, 140, 0.2) 100%);
+  color: #1E6B4E;
+  font-weight: 600;
+  border-left: 4px solid #3BB489;
+}
+
+.tab-content {
+  display: none;
+  animation: fadeInTab 0.35s ease-out forwards;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeInTab {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Card & Badge Accents
+   -------------------------------------------------------------------------- */
+.badge-mint { background-color: rgba(59, 180, 137, 0.15); color: #15734D; border: 1px solid rgba(59, 180, 137, 0.35); }
+.badge-sage { background-color: rgba(118, 197, 140, 0.2); color: #2B6E3C; border: 1px solid rgba(118, 197, 140, 0.4); }
+.badge-teal { background-color: rgba(38, 166, 154, 0.15); color: #00695C; border: 1px solid rgba(38, 166, 154, 0.35); }
+.badge-lime { background-color: rgba(174, 213, 129, 0.25); color: #33691E; border: 1px solid rgba(174, 213, 129, 0.45); }
+.badge-yellow { background-color: rgba(255, 202, 40, 0.2); color: #B78103; border: 1px solid rgba(255, 202, 40, 0.45); }
+.badge-orange { background-color: rgba(255, 138, 101, 0.2); color: #D84315; border: 1px solid rgba(255, 138, 101, 0.45); }
+.badge-red { background-color: rgba(239, 83, 80, 0.15); color: #C62828; border: 1px solid rgba(239, 83, 80, 0.35); }
+.badge-purple { background-color: rgba(74, 44, 109, 0.12); color: #4A2C6D; border: 1px solid rgba(74, 44, 109, 0.3); }
+.badge-blue { background-color: rgba(2, 136, 209, 0.15); color: #0277BD; border: 1px solid rgba(2, 136, 209, 0.35); }
+
+.card-hover {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -6px rgba(59, 180, 137, 0.12), 0 6px 12px -4px rgba(0, 0, 0, 0.04);
+}
+
+/* --------------------------------------------------------------------------
+   Table Overflow & Custom Styling
+   -------------------------------------------------------------------------- */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0.75rem;
+}
+
+.table-responsive table {
+  min-width: 680px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table-responsive th {
+  background-color: #F8FAFC;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* --------------------------------------------------------------------------
+   Print Optimizations
+   -------------------------------------------------------------------------- */
+@media print {
+  #splash-screen, #global-spinner, #sidebar, .no-print, header button, .mobile-bottom-nav {
+    display: none !important;
+  }
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .tab-content {
+    display: block !important;
+    page-break-after: always;
+  }
+}
